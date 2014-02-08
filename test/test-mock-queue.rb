@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 
-require 'mock-thread/mock-queue.rb'
+require 'mock-thread/mock-queue'
 
 class TestMockQueueWithPushPopYields < Minitest::Test
   def setup

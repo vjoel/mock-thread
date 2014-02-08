@@ -1,6 +1,6 @@
 require 'fiber'
 
-require 'mock-thread/mock-queue.rb'
+require 'mock-thread/mock-queue'
 
 class MockThread
   class IsBlocked < RuntimeError; end

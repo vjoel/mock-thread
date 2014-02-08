@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 
-require 'mock-thread/mock-thread.rb'
+require 'mock-thread/mock-thread'
 
 class TestMockThread < Minitest::Test
   def test_step
