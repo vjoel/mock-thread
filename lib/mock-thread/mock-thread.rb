@@ -10,6 +10,14 @@ class MockThread
     MockQueue.new
   end
   
+  # Override to update any state before running a step. For example, update
+  # part of the system that is not expressed by a mock thread, such as
+  # a component that processes what mock threads have sent to a queue.
+  def update_before; end
+
+  # Override to update any state after running a step.
+  def update_after; end
+  
   # Schedule some code for deferred execution. For example:
   #
   #   c.will {foo}.will {bar}
@@ -26,9 +34,9 @@ class MockThread
       fiber = @will_do[0] or raise IsDone, "nothing to do"
 
       if fiber.alive?
-        ###update
+        update_before
         val = fiber.resume
-        ###update
+        update_after
         return val
       end
 
@@ -42,9 +50,9 @@ class MockThread
 
       count = 0
       while fiber.alive?
-        ###update
+        update_before
         val = fiber.resume
-        ###update
+        update_after
         if fiber.alive? or @will_do.size > 1
           if val == :block
             count += 1
@@ -77,7 +85,7 @@ class MockThread
     fiber = Fiber.new { instance_eval &block }
     val = nil
     count = 0
-    ###update
+    update_before
     while fiber.alive?
       val = fiber.resume
       if val == :block
@@ -88,7 +96,7 @@ class MockThread
       else
         count = 0
       end
-      ###update
+      update_after
     end
     val
   end
