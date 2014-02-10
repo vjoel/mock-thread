@@ -12,10 +12,12 @@ class MockThread
   
   # Override to update any state before running a step. For example, update
   # part of the system that is not expressed by a mock thread, such as
-  # a component that processes what mock threads have sent to a queue.
+  # a component that prepares what mock threads will receive in a queue.
   def update_before; end
 
-  # Override to update any state after running a step.
+  # Override to update any state after running a step. For example, update
+  # part of the system that is not expressed by a mock thread, such as
+  # a component that processes what mock threads have sent to a queue.
   def update_after; end
   
   # Schedule some code for deferred execution. For example:
