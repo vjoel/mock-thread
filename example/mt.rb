@@ -1,4 +1,4 @@
-require 'mock-thread/mock-thread'
+require 'mock-thread'
 
 mt1 = MockThread.new
 q1 = mt1.make_queue
